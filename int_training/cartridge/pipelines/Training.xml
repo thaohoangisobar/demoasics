@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?demandware-pipeline version="2.0"?>
+
+<pipeline type="view">
+  <branch basename="CreateCustomObjbyForm">
+    <segment>
+      <node>
+        <start-node name="CreateCustomObjbyForm" secure="false"/>
+        <node-display x="2" y="1"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.customobj" key="FormElement"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="(myCustomObj==null)? CurrentHttpParameterMap.ID.stringValue  : myCustomObj.custom.ID" key="From_0"/>
+          <key-binding alias="customObjID" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="2"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="true"/>
+          <config-property key="OnError" value="PIPELET_ERROR"/>
+          <config-property key="ScriptFile" value="demoscripts/createCustomObj.ds"/>
+          <key-binding alias="errorLog" key="ScriptLog"/>
+          <key-binding alias="customObjID" key="ID"/>
+          <key-binding alias="myCustomObj" key="myCustomObj"/>
+          <key-binding alias="myProvince" key="myProvince"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="error">
+          <transition target-connector="in1" target-path="./+1/b2.1/b3.1"/>
+        </branch>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="myCustomObj.custom.province" key="From_0"/>
+          <key-binding alias="CurrentForms.customobj.province.value" key="To_0"/>
+          <key-binding alias="myCustomObj.custom.province" key="From_1"/>
+          <key-binding alias="CurrentForms.customobj.province.htmlValue" key="To_1"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="SetFormOptions" pipelet-set-identifier="bc_api">
+          <key-binding alias="CurrentForms.customobj.province" key="FormField"/>
+          <key-binding alias="myProvince" key="Options"/>
+          <key-binding alias="null" key="Begin"/>
+          <key-binding alias="null" key="End"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="UpdateFormWithObject" pipelet-set-identifier="bc_api">
+          <config-property key="Clear" value="false"/>
+          <key-binding alias="CurrentForms.customobj" key="Form"/>
+          <key-binding alias="myCustomObj" key="Object"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
+      </node>
+      <transition target-connector="in1" target-path="./+1"/>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <interaction-continue-node secure="true" start-name="testingForm" transaction-required="false">
+          <template buffered="true" dynamic="false" name="form/customobj"/>
+        </interaction-continue-node>
+        <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="add">
+          <transition target-connector="in" transaction-control="begin"/>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="demoscripts/createCustomObjForAdd.ds"/>
+                <key-binding alias="logerror" key="ScriptLog"/>
+                <key-binding alias="CurrentForms.customobj.ID.value" key="ID"/>
+                <key-binding alias="myCustomObj" key="myCustomObj"/>
+              </pipelet-node>
+              <node-display x="-1" y="1"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in1" target-path="./b3.1">
+                  <transition-display>
+                    <bend-point relative-to="source" x="3" y="0"/>
+                  </transition-display>
+                </transition>
+              </branch>
+            </node>
+            <simple-transition/>
+            <node>
+              <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.customobj" key="Form"/>
+                <key-binding alias="myCustomObj" key="Object"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+              <branch basename="b3" source-connector="error">
+                <transition target-connector="in1" transaction-control="rollback">
+                  <transition-display>
+                    <bend-point relative-to="source" x="3" y="0"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="2" y="-8"/>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="target" x="-1" y="0"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <end-node name="error"/>
+                    <node-display orientation="horizontal" x="1" y="-2"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <transition target-connector="in2" target-path="../-1" transaction-control="commit">
+              <transition-display>
+                <bend-point relative-to="source" x="-2" y="-1"/>
+                <bend-point relative-to="target" x="-4" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="update">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="true"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="demoscripts/updateCustomObj.ds"/>
+                <key-binding alias="errorCode" key="ScriptLog"/>
+                <key-binding alias="CurrentForms.customobj.firstname.value" key="firstName"/>
+                <key-binding alias="CurrentForms.customobj.ID.value" key="ID"/>
+                <key-binding alias="CurrentForms.customobj.lastname.value" key="lastName"/>
+                <key-binding alias="CurrentForms.customobj.email.value" key="Name"/>
+                <key-binding alias="myCustomObj" key="myCustomObj"/>
+                <key-binding alias="CurrentForms.customobj.email.value" key="Email"/>
+                <key-binding alias="CurrentForms.customobj" key="currentForm"/>
+              </pipelet-node>
+              <node-display x="1" y="2"/>
+              <branch basename="b2" source-connector="error">
+                <transition target-connector="in2" target-path="../b2.1/b3.1"/>
+              </branch>
+            </node>
+            <transition target-connector="in1" target-path="../-1">
+              <transition-display>
+                <bend-point relative-to="source" x="4" y="-2"/>
+                <bend-point relative-to="target" x="6" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+      </node>
+      <transition target-connector="in1" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="1"/>
+        </transition-display>
+      </transition>
+    </segment>
+    <segment>
+      <node>
+        <join-node/>
+        <node-display x="2" y="0"/>
+      </node>
+      <transition target-connector="in1" target-path="./-1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="-3"/>
+        </transition-display>
+      </transition>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_2">
+    <segment>
+      <node>
+        <text-node>
+          <description>Set interaction continue node with security = true to validate form</description>
+        </text-node>
+        <node-display x="4" y="6"/>
+      </node>
+    </segment>
+  </branch>
+</pipeline>

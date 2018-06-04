@@ -1,0 +1,25 @@
+<isprint value="${pdict.variable}" encoding="off" /><br />
+
+<isif condition="${pdict.count=='1'}" >
+	Count = 1
+	<iselseif condition="${pdict.count=='2'}" >
+	Count = 2
+	<iselse>
+	Count khong bang 1
+</isif><br />
+ 
+ <ul>
+	<isloop items="${new Array('1','2','3','4','5','6')}" var="a" status="loopstate">
+		<isif condition="${loopstate.index==2}" >
+			<isnext>
+		</isif>
+		<li style="color:${loopstate.odd?'red':'green'}">
+			${a}
+		</li>
+		<isif condition="${loopstate.last}" >
+			<li>
+				7
+			</li>
+		</isif>
+	</isloop>
+</ul>

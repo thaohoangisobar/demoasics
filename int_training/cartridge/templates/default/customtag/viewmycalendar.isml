@@ -1,0 +1,10 @@
+<isscript>
+	var day= '20';
+	var month= '11';
+	var year= '2016';
+</isscript>
+
+<isinclude template="util/modules"/>
+
+<iscomment><iscalendar day="10" month="11" year="2016" /></iscomment>
+<iscalendar day="${day}" month="${month}" year="${year}" />

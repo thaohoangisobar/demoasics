@@ -1,0 +1,51 @@
+<iscomment>
+	<isif condition="${pdict.flag==true}" >
+		flag = true		
+		<iselseif condition="${empty(pdict.flag)}" >
+		we don't have the flag variable.
+		<iselse>
+		flag = false
+	</isif>
+</iscomment>
+
+${pdict.flag==true?'flag=true':'flag=false'} <br />
+
+<p style="color:${pdict.flag==true?'red':'green'}">My Message</p> <br />
+
+<ul>
+	<isloop items="${new Array('1','2','3','4','5')}" var="a" status="loopstate" >
+		<iscomment>
+			<isif condition="${loopstate.odd}" >
+				<isnext>
+			</isif>
+		</iscomment>
+		
+		<iscomment>
+			<li>
+			 Index : ${loopstate.index} - value : ${a}
+			</li>
+		</iscomment>
+		
+		<iscomment>
+		<isif condition="${loopstate.index==3}" >
+			<isbreak>
+		</isif>
+		
+		<isif condition="${loopstate.odd}" >
+			  	<li style="color:red">${a}</li>
+			<iselse>
+				<li style="color:green">${a}</li>
+		</isif>
+		</iscomment>
+		
+		<iscomment>
+			<li>
+			${loopstate.odd?'red':'green'}
+			</li>
+		</iscomment>
+		
+		<li style="color:${loopstate.odd?'red':'green'}">${a}</li>
+		
+		
+	</isloop>
+</ul>

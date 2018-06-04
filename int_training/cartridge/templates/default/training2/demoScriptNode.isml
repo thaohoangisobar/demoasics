@@ -1,0 +1,2 @@
+Sum : ${pdict.sumResult}<br />
+Product name : ${pdict.Product.name};${pdict.Product.custom.CustomAttr1}<br />

@@ -1,0 +1,10 @@
+
+<isinclude template="util/modules"/>
+<iscomment>
+<iscontentasset aid="demo_content_asset_20161027"/> <br />
+<img src="${URLUtils.staticURL('/images/Google.png')}" />
+</iscomment>
+
+<isdecorate template="content/home/pt_storefront">
+	<isslot id="testing_slot_20170615" description="Demo slot" context="global" />
+</isdecorate>

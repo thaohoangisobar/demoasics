@@ -1,0 +1,50 @@
+/**
+ * SecureTran.ds
+ *
+ * This script attempts to get respone object,Token.
+ *
+ * @input PaRes : String
+ * @input MD    : String
+*/
+importPackage( dw.system );
+importPackage( dw.net );
+importPackage( dw.web );
+importPackage( dw.crypto );
+importPackage( dw.util );
+importPackage( dw.svc );
+function execute( pdict : PipelineDictionary ) : Number
+{
+	let logger = Logger.getLogger("GMO","GMO");
+	try {
+		let service:Service;
+		let result:Result;
+		let paramRequest	= 'PaRes=' + Encoding.toURI(pdict.PaRes) + '&'
+							+ 'MD=' + pdict.MD;
+		service = ServiceRegistry.get("GMO.SecureTran");
+		service.addHeader("Content-Type", "application/x-www-form-urlencoded");
+		service.setRequestMethod("POST");
+		result = service.call(paramRequest);
+		let respone = result.object.text.split("&");
+		let objrespone = {};
+		for(let i in respone){
+			let split = respone[i].split('=');
+			objrespone[split[0]] = split[1];
+		}
+
+		pdict.OrderID       = objrespone["OrderID"];
+		if(!objrespone.hasOwnProperty('ErrCode')){
+			logger.debug("API SecureTran.idPass : execute order ID {0} success !", objrespone['OrderID']);
+		}else{
+			logger.debug("API SecureTran.idPass : execute order ID {0} fail !; ErrCode : {1}; ErrInfo : {2}"
+												, objrespone["OrderID"]
+												, objrespone["ErrCode"]
+												, objrespone["ErrInfo"]);
+			return PIPELET_ERROR;
+		}
+	} catch(e) {
+		logger.debug("API SecureTran.idPass : Exception error !");
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}
+exports.execute = execute;

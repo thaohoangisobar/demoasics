@@ -1,0 +1,7 @@
+This is remote include : ${pdict.Variable} <br />
+Session : ${session.custom.sessionVar} <br />
+Request : ${request.custom.requestVar} <br />
+Page : ${pageVar} <br />
+
+Pid: ${pdict.CurrentHttpParameterMap.pid.value} <br />
+Cid: ${pdict.CurrentHttpParameterMap.cid.value} <br />

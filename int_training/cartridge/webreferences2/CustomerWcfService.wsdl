@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CustomerWcfService" targetNamespace="http://tempuri.org/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" 
+    xmlns:i0="http://www.cegid.fr/Retail/1.0" 
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+    xmlns:wsa10="http://www.w3.org/2005/08/addressing" 
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+    xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" 
+    xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" 
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
+    xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:tns="http://tempuri.org/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:schemaLocation="http://schemas.xmlsoap.org/soap/encoding/">
+    <wsdl:import namespace="http://www.cegid.fr/Retail/1.0" location="https://y2-poc.lvmh.com/Y2-POC/CustomerWcfService.svc?wsdl"/>
+    <wsdl:types/>
+    <wsdl:binding name="BasicHttpBinding_ICustomerWcfService" type="i0:ICustomerWcfService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="HelloWorld">
+            <wsdl:documentation>HelloWorld method to validate the access to Web Services from every very light HTTP client via Javascript for example</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICbrBasicWebServiceInterface/HelloWorld" style="document"/>
+            <wsdl:input>
+                <wsdl:documentation>Text to pass to test consumption.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl:documentation>Returns the text typed upon entry, concatenated with phrase 'Hello You'</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCustomerIdByReference">
+            <wsdl:documentation>Returns the identifier of the customer matching a given customer reference.</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICustomerWcfService/GetCustomerIdByReference" style="document"/>
+            <wsdl:input>
+                <wsdl:documentation>Reference enabling the identification of the customer.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl:documentation>Returns the identifier of the customer found.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="GetCustomerDetail">
+            <wsdl:documentation>Returns information that can be viewed from the customer record.</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICustomerWcfService/GetCustomerDetail" style="document"/>
+            <wsdl:input>
+                <wsdl:documentation>Customer identifier.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="SearchCustomerIds">
+            <wsdl:documentation>Returns the list of customers who meet the search criteria present in the object passed as input parameter.</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICustomerWcfService/SearchCustomerIds" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl:documentation>Returns the list of customer records with viewable information.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="AddNewCustomer">
+            <wsdl:documentation>Enables the creation of a customer.</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICustomerWcfService/AddNewCustomer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl:documentation>Returns the identifier of the customer created.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="UpdateCustomer">
+            <wsdl:documentation>Enables the update of an existent customer.</wsdl:documentation>
+            <soap:operation soapAction="http://www.cegid.fr/Retail/1.0/ICustomerWcfService/UpdateCustomer" style="document"/>
+            <wsdl:input>
+                <wsdl:documentation>Identifier of the customer to update.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl:documentation>Returns the identifier of the updated customer.</wsdl:documentation>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="CbpFaultDetailFault">
+                <soap:fault name="CbpFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+            <wsdl:fault name="BusinessFaultDetailFault">
+                <soap:fault name="BusinessFaultDetailFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CustomerWcfService">
+        <wsdl:documentation>Web Service contract for customer management.</wsdl:documentation>
+        <wsdl:port name="BasicHttpBinding_ICustomerWcfService" binding="tns:BasicHttpBinding_ICustomerWcfService">
+            <soap:address location="https://y2-poc.lvmh.com/Y2-POC/CustomerWcfService.svc"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

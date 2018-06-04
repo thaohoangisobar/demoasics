@@ -1,0 +1,29 @@
+/*
+*   @input VariableA : Number
+*   @input VariableB : Number
+*   @input pid : String
+*   @output Result : Number
+*   @output Product : dw.catalog.Product
+*
+*/
+importPackage( dw.system );
+importPackage( dw.catalog );
+
+function execute( pdict : PipelineDictionary ) : Number
+{
+   //var sum : Number =  pdict.VariableA + pdict.VariableB;
+   var sum : Number = sumVariable(pdict.VariableA,pdict.VariableB);
+   pdict.Result = sum; 
+   //Get Product
+   var pd : Product = ProductMgr.getProduct(pdict.pid);
+   if(pd!=null){
+   		pdict.Product = pd;
+   }else{
+   		return PIPELET_ERROR;
+   }	  
+   return PIPELET_NEXT;
+}
+
+function sumVariable(a:Number,b:Number){
+	return a+b;
+}

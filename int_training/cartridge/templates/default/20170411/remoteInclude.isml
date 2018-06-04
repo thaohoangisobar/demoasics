@@ -1,0 +1,6 @@
+This is demo remote template <br />
+My variable in remote template : ${pdict.variable} <br />
+Remote Session variable : ${session.custom.sessionVar} <br />
+Remote Request variable : ${request.custom.requestVar} <br />
+Remote Page variable : ${pageVar}<br />
+My Pagevar variable : ${pdict.myPageVar} 

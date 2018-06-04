@@ -1,0 +1,7 @@
+Today is ${pdict.day}/${pdict.month}/${pdict.year}.
+<isif condition="${pdict.day=='30' && pdict.month=='11'}" >
+	This is my birthday.
+</isif>
+<isif condition="${pdict.day=='20' && pdict.month=='11'}" >
+	This is VN teacher days.
+</isif>

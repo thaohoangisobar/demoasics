@@ -1,0 +1,8 @@
+<html>
+	<head></head>
+	<body>
+		<p>Section A</p>	
+			<isreplace/>
+		<p>Section B</p>	
+	</body>
+</html>

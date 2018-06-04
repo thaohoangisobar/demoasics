@@ -1,0 +1,1 @@
+This is my session : ${session.custom.sessionVar}

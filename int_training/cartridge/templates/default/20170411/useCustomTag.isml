@@ -1,0 +1,19 @@
+<isdecorate template="content/home/pt_storefront" >
+
+	<isscript>
+		var day= '20';
+		var month= '11';
+		var year= '1988';
+	</isscript>
+	
+	${day},${month},${year}
+	
+	<iscomment>Always include modules file FIRST</iscomment>
+	<isinclude template="util/modules"/>
+	
+	<iscomment><iscalendar day="10" month="11" year="2016" /></iscomment>
+	<iscomment>USE my customtag : calendar</iscomment>
+	
+	<iscalendar day="${day}" month="${month}" year="${year}" />
+
+</isdecorate>

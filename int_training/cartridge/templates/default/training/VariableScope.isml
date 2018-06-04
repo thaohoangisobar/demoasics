@@ -1,0 +1,54 @@
+My site Pref value :${mySitePrefValue}
+This is template 1.<br />
+<isset name="sessionVar" value="ThisIsSession" scope="session" >
+<isset name="requestVar" value="ThisIsRequestVar" scope="request" >
+<isset name="pageVar" value="${pdict.variableA}" scope="page" >
+Session var: ${session.custom.requestVar} <br />
+Request var: ${request.custom.requestVar} <br />
+Page var : ${pageVar}
+${pdict.variableA}
+<isinclude template="training/VariableInIncludeTemplate.isml" />
+<isinclude url="${URLUtils.url('Page-Include')}"/>
+<br />
+=======================ISSCRIPT===========================
+<iscomment>
+Demo isscript
+</iscomment>
+<isscript> 
+	var getvalue : String ="mystr";
+	try{
+		var sitePrefs : SitePreferences = dw.system.Site.getCurrent().getPreferences();
+	 	var mySitePrefValue : String = sitePrefs.getCustom()["gmo_shopID"];
+	}catch(e){
+		var error : String = e.message;
+	}
+
+</isscript>
+${error}
+${getvalue}
+${mySitePrefValue}
+<isprint value="${mySitePrefValue}" encoding="off" />
+<br />
+<br />
+
+<isif condition="${mySitePrefValue=='123456'}" >
+	This is isif		
+	<iselse>
+	This is iselse
+</isif>
+${mySitePrefValue=='123456'?'red':'yellow'}
+<p style="color:<isif condition=${mySitePrefValue=='123456'}>red;<iselse>yellow;</isif>">This is abcde</p>
+<br />
+Getvalue : ${getvalue} <br />
+Error : ${error}<br />
+====================
+<ul>
+<isloop items="${new Array('1','2','3')}" var="a" status="loopstate"  >
+	<isif condition="${loopstate.index==1}" >
+		<isbreak>
+	</isif>
+	<li>
+	  ${a}
+	</li>
+</isloop>
+</ul>

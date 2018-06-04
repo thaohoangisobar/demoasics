@@ -1,0 +1,25 @@
+========================ISSCRIPT==============================<br />
+<isscript> 
+	var getvalue : String ="mystr";
+	try{
+		var sitePrefs : SitePreferences = dw.system.Site.getCurrent().getPreferences();
+	 	var mySitePrefValue : String = sitePrefs.getCustom()["Training_20161130"];
+	}catch(e){
+		var error : String = e.message;
+	}
+</isscript>
+
+==========================ISPRINT===============================<br />
+<isprint value="${mySitePrefValue}" encoding="off" /><br />
+
+
+<ul>
+	<isloop items="${new Array('1','2','3','4','5','6')}" var="a" status="loopstate">
+		<isif condition="${loopstate.index==2}" >
+			<isbreak>
+		</isif>
+		<li style="color:${loopstate.odd?'red':'green'}">
+		  ${a}
+		</li>
+	</isloop>
+</ul>

@@ -1,0 +1,1 @@
+Email : ${pdict.myCustomObj.custom.email}

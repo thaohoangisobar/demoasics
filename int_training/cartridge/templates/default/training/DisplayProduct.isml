@@ -1,0 +1,2 @@
+system attribute: ${pdict.Product.name} <br />
+custom attribute: ${pdict.Product.custom.myAttribute}

@@ -1,0 +1,87 @@
+/**
+ * ExecTranRakutenId.ds
+ *
+ * This script attempts to get respone object,Token.
+ *
+ * @input OrderID : String
+ * @input AccessID : String
+ * @input AccessPass : String
+ * @input JobCd : String
+ * @input ItemId : String
+ * @input ItemName : String
+ * @input MultiItem : String
+ * @input RetURL : String
+ * @input ErrorRcvURL : String
+ * @output resultPayment : Object
+ * @output Token : String
+*/
+importPackage( dw.system );
+importPackage( dw.net );
+importPackage( dw.web );
+importPackage( dw.crypto );
+importPackage( dw.util );
+importPackage( dw.svc );
+function execute( pdict : PipelineDictionary ) : Number
+{
+	let logger = Logger.getLogger("GMO","GMO");
+	try {
+		let group = dw.order.OrderMgr.getOrder(pdict.OrderID).getCustomer().getCustomerGroups().iterator();
+		let html ='';
+		let g;
+		while(group.hasNext()){
+			g = group.next();
+			if(g.getID() != 'Everyone')
+				html += g.getID().toString();
+		}
+
+		let shopID = Site.getCurrent().getCustomPreferenceValue('gmo_shopID');
+		let shopPass = Site.getCurrent().getCustomPreferenceValue('gmo_shopPass');
+		let service:Service;
+		let result:Result;
+		let paramRequest	= 'ShopID=' + shopID + '&'
+							+ 'ShopPass=' + shopPass + '&'
+							+ 'AccessID=' + pdict.AccessID + '&'
+							+ 'AccessPass=' + pdict.AccessPass + '&'
+							+ 'OrderID=' +  pdict.OrderID + '&'
+							+ 'ItemId=' +  pdict.ItemId + '&'
+							+ 'ItemName=' +  pdict.ItemName + '&'
+							+ 'RetURL=' +  pdict.RetURL + '&'
+							+ 'ErrorRcvURL=' +  pdict.ErrorRcvURL;
+
+		if(pdict.ItemSubId != ""){
+			paramRequest += '&ItemSubId=' +  pdict.ItemSubId;
+		}
+
+		service = ServiceRegistry.get("GMO.ExecTranRakutenId");
+		service.addHeader("Content-Type", "application/x-www-form-urlencoded");
+		service.setEncoding("SJIS");
+		service.setRequestMethod("POST");
+		result = service.call(paramRequest);
+		let respone = result.object.text.split("&");
+		let objrespone = {};
+		for(let i in respone){
+			let split = respone[i].split('=');
+			objrespone[split[0]] = split[1];
+		}
+		if(objrespone.hasOwnProperty('Token')){
+			let paymentStatus = (pdict.JobCd=="AUTH")?"Not Paid!":"Paid!";
+			pdict.resultPayment = objrespone;
+			pdict.Token = objrespone['Token'];
+			logger.debug("API ExecTranRakutenId.idPass : execute order ID {0} success !; order status : Open!; payment status : {1}"
+												, pdict.OrderID
+												, paymentStatus);
+		}else{
+			logger.debug("API ExecTranRakutenId.idPass : execute order ID {0} fail !; order status : Open!; payment status : Not Paid!; ErrCode : {1}; ErrInfo : {2}"
+												, pdict.OrderID
+												, objrespone["ErrCode"]
+												, objrespone["ErrInfo"]);
+			return PIPELET_ERROR;
+		}
+	} catch(e) {
+		logger.debug("API ExecTranRakutenId.idPass : execute order ID {0} error !; order status : Open!; payment status : Not Paid!"
+											, pdict.OrderID);
+		return PIPELET_ERROR;
+	}
+	return PIPELET_NEXT;
+}
+exports.execute = execute;

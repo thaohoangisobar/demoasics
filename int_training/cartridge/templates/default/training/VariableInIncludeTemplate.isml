@@ -1,0 +1,4 @@
+This is include template. <br />
+Session : ${session.custom.sessionVar} <br />
+Request : ${request.custom.requestVar} <br />
+Page : ${pageVar} <br />

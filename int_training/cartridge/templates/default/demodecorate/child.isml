@@ -1,0 +1,5 @@
+<isset name="test" value="My name is An" scope="page" >
+<isdecorate template="demodecorate/pt_demodecorate.isml">
+	This is replace content.<br />
+	${test}
+</isdecorate>

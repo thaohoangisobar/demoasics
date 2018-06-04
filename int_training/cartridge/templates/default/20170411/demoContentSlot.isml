@@ -1,0 +1,3 @@
+<isdecorate template="content/home/pt_storefront">
+	<isslot id="demo_content_slot_20170525" description="Demo slot" context="global" />
+</isdecorate>

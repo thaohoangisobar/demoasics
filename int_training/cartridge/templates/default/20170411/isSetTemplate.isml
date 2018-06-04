@@ -1,0 +1,17 @@
+<iscomment>Demo Isset</iscomment>
+===================Isset===========================<br />
+<isset name="sessionVar" value="ThisIsSession" scope="session" >
+<isset name="requestVar" value="ThisIsRequestVar" scope="request" >
+<isset name="pageVar" value="ThisIsPageVar" scope="page" >
+Session variable : ${session.custom.sessionVar} <br />
+Request variable : ${request.custom.requestVar} <br />
+Page variable : ${pageVar} 
+<iscomment>
+<isremove name="sessionVar" />
+</iscomment>
+<br />
+===================Isinclude=========================<br />
+<iscomment>Demo local include</iscomment>
+<isinclude template="20170411/localInclude.isml" />
+<iscomment>Demo remote include</iscomment><br />
+<isinclude url="${URLUtils.url('IsmlTraining-CallRemoteInclude','pagevar',pageVar)}"/>

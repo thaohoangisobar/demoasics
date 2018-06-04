@@ -1,0 +1,3 @@
+Resource error msg : ${pdict.error} <br />
+Resource error msgf : ${pdict.error1}<br />
+${pdict.errorlog}

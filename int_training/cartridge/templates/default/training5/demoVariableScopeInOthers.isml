@@ -1,0 +1,9 @@
+Session : ${session.custom.sessionVar} <br />
+Request : ${request.custom.requestVar} <br />
+Page : ${pageVar} <br />
+
+<iscomment>
+	<isremove
+  		name  = "sessionVar"
+  		scope = "session" >
+</isremove>

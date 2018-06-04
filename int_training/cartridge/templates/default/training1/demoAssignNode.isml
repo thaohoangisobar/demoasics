@@ -1,0 +1,3 @@
+${pdict.myAssignVariable} <br />
+Array : ${pdict.currentArray[2]} <br />
+Count : ${pdict.count}

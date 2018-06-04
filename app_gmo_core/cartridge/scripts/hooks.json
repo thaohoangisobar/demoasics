@@ -1,0 +1,20 @@
+{
+	"hooks": [
+		{
+			"name": "dw.ocapi.shop.basket.calculate",
+			"script": "./cart/calculate.js"
+		},
+		{
+			"name": "dw.extensions.applepay.paymentAuthorized.authorizeOrderPayment",
+			"script": "./checkout/applepay.js"
+		},
+		{
+			"name": "app.payment.processor.GMO_PAYMENT",
+			"script": "~/../int_gmo/cartridge/controllers/GMO_PAYMENT"
+		},
+		{
+			"name": "app.payment.processor.GMO_RAKUTENID",
+			"script": "~/../int_gmo/cartridge/controllers/GMO_RAKUTENID"
+		}
+	]
+}

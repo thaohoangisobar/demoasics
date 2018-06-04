@@ -1,0 +1,50 @@
+<iscomment>This is comment line</iscomment>
+<isset name="sessionVar" value="${pdict.variable}" scope="session" >
+<isset name="requestVar" value="ThisIsRequestVar" scope="request" >
+<isset name="pageVar" value="ThisIsPageVar" scope="page" >
+
+========================VARIABLE========================<br />
+Session : ${session.custom.sessionVar} <br />
+Request : ${request.custom.requestVar} <br />
+Page : ${pageVar} <br />
+
+========================LOCAL INCLUDE========================<br />
+<isinclude template="training/VariableInIncludeTemplate.isml" />
+========================REMOTE INCLUDE========================<br />
+<isinclude url="${URLUtils.url('Training4-RemoteInclude','pid',pageVar,'cid',request.custom.requestVar)}"/>
+========================ISSCRIPT==============================<br />
+<isscript> 
+	var getvalue : String ="mystr";
+	try{
+		var sitePrefs : SitePreferences = dw.system.Site.getCurrent().getPreferences();
+	 	var mySitePrefValue : String = sitePrefs.getCustom()["variable_20170328"];
+	}catch(e){
+		var error : String = e.message;
+	}
+</isscript>
+${error}
+==========================ISPRINT===============================<br />
+<isprint value="${mySitePrefValue}" encoding="off" /><br />
+${mySitePrefValue}<br />
+==========================FLOW CONTROL===============================<br />
+<isif condition="${mySitePrefValue=='123'}" >
+	This is isif
+	<iselseif condition="${mySitePrefValue=='456'}" >
+	This is iselseif
+	<iselse>
+	This is iselse
+</isif><br />
+
+What 's color? ${mySitePrefValue=='123'?'red':'yellow'}
+<p style="color:<isif condition=${mySitePrefValue=='123'}>red;<iselse>yellow;</isif>">This is param 1</p><br />
+<p style="color:${mySitePrefValue=='123'?'red':'yellow'}">This is param 2</p>
+<br />
+<ul>
+	<isloop items="${new Array('1','2','3','4','5','6')}" var="a" status="loopstate">
+		<isif condition="${loopstate.index==2}" ><isnext/></isif>
+		<li style="color:${loopstate.odd?'red':'green'}">
+		  ${a}
+		</li>
+	</isloop>
+</ul>
+

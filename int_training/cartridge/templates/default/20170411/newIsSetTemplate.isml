@@ -1,0 +1,3 @@
+Session variable : ${session.custom.sessionVar} <br />
+Request variable : ${request.custom.requestVar} <br />
+Page variable : ${pageVar} 

@@ -1,0 +1,16 @@
+=======================ISSCRIPT===========================<br />
+<iscomment>Demo isscript</iscomment>
+<isscript> 
+	var getvalue : String ="mystr";
+	try{
+		var sitePrefs : SitePreferences = dw.system.Site.getCurrent().getPreferences();
+	 	var mySitePrefValue : String = sitePrefs.getCustom()["mySitePreference_20170411"];
+	}catch(e){
+		var error : String = e.message;
+	}
+</isscript>
+${error}
+This is my sitepreference : ${mySitePrefValue}
+
+
+<isprint value="${mySitePrefValue}" encoding="on" />

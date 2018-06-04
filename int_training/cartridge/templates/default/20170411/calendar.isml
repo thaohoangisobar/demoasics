@@ -1,0 +1,7 @@
+<isif condition="${pdict.day=='30' && 
+				   pdict.month=='11' && 
+				   pdict.year=='1988'}" >
+	This is my birthday.			   
+	<iselse>
+	Do something			   
+</isif>

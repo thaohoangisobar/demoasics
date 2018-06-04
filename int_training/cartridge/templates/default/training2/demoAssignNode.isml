@@ -1,0 +1,10 @@
+${pdict.variable}<br />
+${pdict.currentArray[2]}<br />
+This is my profile : 
+${pdict.currentObj.firstname},
+${pdict.currentObj.lastname},
+${pdict.currentObj.age},
+${pdict.currentObj.sex},
+${pdict.currentObj.isMarried},
+${pdict.currentObj.isHotboy}
+

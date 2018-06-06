@@ -1,0 +1,9 @@
+this is display for custom dropdown</br>
+${pdict.myVar}</br>
+Hey girl!!!
+<select name="${pdict.CurrentForms.customdropdown.customdropdownlist.htmlName}" id="customdropdownid" class="input-select">
+    <iscomment> <option value="" selected="selected">${Resource.msg('billing.creditcardlistselect','checkout',null)}</option> </iscomment>
+    <isloop items="${pdict.myTestValue}" var="item">
+        <option value="${item}">${item}</option>
+    </isloop>
+</select>

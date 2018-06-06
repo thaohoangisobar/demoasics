@@ -14,7 +14,7 @@
                         var saveCardMode = Site.getCurrent().getCustomPreferenceValue('gmo_save_card_mode');
                 </isscript>
             </isif>
-
+${pdict.myTestOnController}
 <isif condition="${pdict.OrderTotal > 0}">
     <fieldset>
 
@@ -125,8 +125,13 @@
                         <isscript>
                             var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
                         </isscript>
-
-                        <isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/>
+                        <iscomment> <isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/> </iscomment>
+                        <iscomment> <select name="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.htmlName}" id="customdropdownid" class="input-select"> </iscomment>
+                            <iscomment> <option value="" selected="selected">${Resource.msg('billing.creditcardlistselect','checkout',null)}</option> </iscomment>
+                            <iscomment> <isloop items="${pdict.myTestValue}" var="item">
+                                <option value="${item}">${item}</option>
+                            </isloop>
+                        </select> </iscomment>
 
                     </div>
 

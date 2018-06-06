@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
+    <list formid="customdropdownlist">
+        
+        <!-- action for actually selecting the credit card -->
+        <action formid="customyearoption" valid-form="false"/>
+        
+    </list>
+</form>

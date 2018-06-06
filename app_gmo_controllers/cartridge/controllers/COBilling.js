@@ -20,7 +20,8 @@ var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 var Countries = require('app_gmo_core/cartridge/scripts/util/Countries');
-
+var SitePreferences = require('dw/system/SitePreferences');
+var Site = require('dw/system/Site');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -232,11 +233,14 @@ function publicStart() {
         app.getForm('billing.giftCertCode').clear();
 
         infoObj = gmoCreditController.GetCardPayInfo(cart.object);
-
+        
+        var sitePrefs = Site.getCurrent().getCustomPreferenceValue("years_for_checkoutpage");
+        var test = 'hey';
         start(cart, {
         	gmoCreditCard: creditCardList.gmoCreditCard,
         	gmoCreditPayInfo: infoObj.gmoCreditPayInfo,
-        	ApplicableCreditCards: creditCardList.ApplicableCreditCards
+            ApplicableCreditCards: creditCardList.ApplicableCreditCards,
+            myTestOnController: sitePrefs
         });
     } else {
         app.getController('Cart').Show();

@@ -27,7 +27,7 @@
 			field for credit card expiration year; 
 			a value error (credit card is expired is only displayed for this field) 
 		-->
-	    <!-- <field formid="year" label="resource.year" type="integer" mandatory="true" binding="creditCardExpirationYear"
+	    <field formid="year" label="resource.year" type="integer" mandatory="true" binding="creditCardExpirationYear"
 	      	missing-error="creditcard.yearmissingerror">
 	        <options>
 	            <option optionid="2016" label="year.2016" value="2016"/>
@@ -38,9 +38,9 @@
 	            <option optionid="2021" label="year.2021" value="2021"/>
 	            <option optionid="2022" label="year.2022" value="2022"/>            
 	        </options>
-	    </field> -->
+	    </field>
 
-        <list formid="year" label="resource.year" type="integer" mandatory="true"></list>
+        <!-- <list formid="year" label="resource.year" type="integer" mandatory="true"></list> -->
 	
 		<!-- field for credit card expiration month -->
 	    <field formid="month" label="resource.month" type="integer" mandatory="true" binding="creditCardExpirationMonth"

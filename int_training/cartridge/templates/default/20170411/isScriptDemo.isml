@@ -4,7 +4,7 @@
 	var getvalue : String ="mystr";
 	try{
 		var sitePrefs : SitePreferences = dw.system.Site.getCurrent().getPreferences();
-	 	var mySitePrefValue : String = sitePrefs.getCustom()["mySitePreference_20170411"];
+	 	var mySitePrefValue = Arrays.toString(sitePrefs.getCustom()["years_for_checkoutpage"]);
 	}catch(e){
 		var error : String = e.message;
 	}
@@ -12,5 +12,10 @@
 ${error}
 This is my sitepreference : ${mySitePrefValue}
 
+<isset name="myTestVar" value="${dw.system.Site.getCurrent().getPreferences().custom.years_for_checkoutpage}" scope="page"/>
+${myTestVar}
+<isloop items="${myTestVar}" var="item">
+	${item}<br/>
+</isloop>
 
 <isprint value="${mySitePrefValue}" encoding="on" />

@@ -20,8 +20,6 @@ var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 var Countries = require('app_gmo_core/cartridge/scripts/util/Countries');
-var SitePreferences = require('dw/system/SitePreferences');
-var Site = require('dw/system/Site');
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -168,8 +166,15 @@ function initCreditCardList(cart) {
     applicablePaymentMethods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, paymentAmount.value);
     applicablePaymentCards = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(customer, countryCode, paymentAmount.value);
 
-    app.getForm('billing').object.paymentMethods.creditCard.type.setOptions(applicablePaymentCards.iterator());
-
+    app.getForm('billing').object.paymentMethods.creditCard.type.setOptions(applicablePaymentCards.iterator());    
+    var years = dw.system.Site.getCurrent().getPreferences().custom.years_for_checkoutpage;
+    var Options = new dw.util.ArrayList();
+    for (let index in years){
+        Options.push({"label": years[index], "value": years[index]});
+         
+    }    
+    app.getForm('billing').object.paymentMethods.creditCard.expiration.year.setOptions(Options.iterator());
+    
     applicableCreditCards = null;
 
     if (customer.authenticated) {
@@ -234,13 +239,10 @@ function publicStart() {
 
         infoObj = gmoCreditController.GetCardPayInfo(cart.object);
         
-        var sitePrefs = Site.getCurrent().getCustomPreferenceValue("years_for_checkoutpage");
-        var test = 'hey';
         start(cart, {
         	gmoCreditCard: creditCardList.gmoCreditCard,
         	gmoCreditPayInfo: infoObj.gmoCreditPayInfo,
             ApplicableCreditCards: creditCardList.ApplicableCreditCards,
-            myTestOnController: sitePrefs
         });
     } else {
         app.getController('Cart').Show();

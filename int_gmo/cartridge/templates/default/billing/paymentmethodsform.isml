@@ -29,6 +29,7 @@
 </isscript>
 	<input type="hidden" name="validateError" id="validateError" value="${pdict.validateError!=null?pdict.validateError:'0'}" />
 	<isif condition="${!empty(pdict.ApplicableCreditCards) && pdict.CurrentSession.custom.gmoSelectedCard != 'AddNewCard'}">
+	
 		<input type="hidden" name="hidCardSeq" id="hidCardSeq" value="${pdict.CurrentSession.custom.hiddenCardSeq!=null?pdict.CurrentSession.custom.hiddenCardSeq:''}" />
 		<input type="hidden" name="hidCardType" id="hidCardType">
 		<input type="hidden" name="hidCardPayInfo" id="hidCardPayInfo">
@@ -47,7 +48,6 @@
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.paytime}" type="select" />
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.number}" type="input" attributes="${disabled}" />
-
 		<div class="form-label-text"><span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}</div>
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.month}" type="select" rowclass="month" attributes="${disabled}" />
@@ -56,6 +56,7 @@
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.pay3dsecure}" type="hidden" />
 	<iselse/>
+	
 		<isif condition="${pdict.CurrentSession.custom.gmoSelectedCard == 'AddNewCard'}">
 			<input type="hidden" name="hidCardSeq" id="hidCardSeq" value="${pdict.CurrentSession.custom.gmoSelectedCard}" />
 		<iselse/>
@@ -84,7 +85,14 @@
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.month}" type="select" rowclass="month"/>
 
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.year}" type="select"  rowclass="year"/>
-
+		<iscomment> <isset name="myTestVar" value="${dw.system.Site.getCurrent().getPreferences().custom.years_for_checkoutpage}" scope="page"/>
+		<select name="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.year.htmlName}" 
+		id="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration.year.htmlName}" class="input-select"> </iscomment>
+			<iscomment> <option value="" selected="selected">${Resource.msg('billing.creditcardlistselect','checkout',null)}</option> </iscomment>
+			<iscomment> <isloop items="${myTestVar}" var="item">
+				<option value="${item}">${item}</option>
+			</isloop>
+		</select> </iscomment>
 		<isinputfield formfield="${pdict.CurrentForms.billing.paymentMethods.creditCard.pay3dsecure}" type="hidden" />
 	</isif>
 	<isscript>
